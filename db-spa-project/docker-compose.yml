@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:6.0.2
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=spaDB
+      - MONGO_INITDB_ROOT_PASSWORD=TheBestSecurePassword
+    volumes:
+      - db:/data/db
+    networks:
+      - backend
+
+volumes:
+  db:
+
+networks:
+  backend:
+    name: external-backend
+      

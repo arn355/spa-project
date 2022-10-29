@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  backend:
+    container_name: backend
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      - DB_HOST=mongodb
+      - DB_USER=spaDB
+      - DB_PASSWORD=TheBestSecurePassword
+      - DB_NAME=merndatabase
+      - DB_PORT=27017
+    networks:
+      - backend
+      - frontend
+
+  frontend:
+    container_name: frontend
+    depends_on:
+      - backend
+    build: ./frontend
+    ports:
+      - 80:80
+    networks:
+      - frontend
+
+networks:
+  backend:
+    external:
+      name: external-backend
+  frontend:
+    name: frontend
+    
+      
+      
